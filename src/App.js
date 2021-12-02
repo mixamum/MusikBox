@@ -2,16 +2,18 @@
 import { useDispatch, useSelector } from "react-redux";
 import "./App.css";
 import { Search } from "./Search";
-import { search, loadTopTracks, loadTopArtists } from "./actions";
+import { search, loadTopTracks, loadTopArtists, loadTopTags } from "./actions";
 import { Link, Routes, Route, Navigate } from "react-router-dom";
-import { Track } from "./Track";
+import { Track } from "./components/Track";
 import React, { useEffect } from "react";
-import { Artist } from "./Artist";
+import { Artist } from "./components/Artist";
+import { Tag } from "./components/Tag";
 
 function App() {
   // const song = useSelector((state) => state.songs);
   const topTracks = useSelector((state) => state.topTracks);
   const topArtists = useSelector((state) => state.topArtists);
+  const topTags = useSelector((state) => state.topTags);
   // console.log(topArtists);
   // console.log(topTracks);
   const s = useSelector((state) => state.search);
@@ -19,6 +21,7 @@ function App() {
   useEffect(() => {
     dispatch(loadTopTracks());
     dispatch(loadTopArtists());
+    dispatch(loadTopTags());
     dispatch(search(document.getElementById("textbox").value));
   }, [dispatch]);
   const onSearch = () => {
@@ -70,22 +73,30 @@ function App() {
                 </div>
               </div>
               <div className="body">
-                <div className="songDisplay">
-                  <h2>Top Tracks</h2>
-                  <div className="movie-list">
+                <div className="card-display">
+                  <h2 className="top-heading">Top Tracks</h2>
+                  <div className="card-list">
                     {topTracks.map((track) => (
                       <Track track={track} />
                     ))}
                   </div>
                 </div>
-                <div className="songDisplay">
-                  <h2>Top Artists</h2>
-                  <div className="movie-list">
+                {/* <div className="card-display">
+                  <h2 className="top-heading">Top Artists</h2>
+                  <div className="card-list">
                     {topArtists.map((artist) => (
                       <Artist artist={artist} />
                     ))}
                   </div>
-                </div>
+                </div> */}
+                {/* <div className="songDisplay">
+                  <h2>Top Tags</h2>
+                  <div className="card-list">
+                    {topTags.map((tag) => (
+                      <Tag tag={tag} />
+                    ))}
+                  </div>
+                </div> */}
               </div>
             </>
           }

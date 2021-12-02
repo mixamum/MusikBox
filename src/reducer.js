@@ -3,6 +3,7 @@ import { Action } from "./actions";
 export const initialState = {
   topTracks: [],
   topArtists: [],
+  topTags: [],
   latests: [],
   search: [],
   // loadingSearch: true,
@@ -26,6 +27,12 @@ function reducer(state = initialState, action) {
       return {
         ...state,
         topArtists: action.payload,
+      };
+
+    case Action.LoadTopTags:
+      return {
+        ...state,
+        topTags: action.payload,
       };
 
     default:

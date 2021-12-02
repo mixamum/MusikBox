@@ -3,7 +3,7 @@ import "./Search.css";
 import { useDispatch } from "react-redux";
 import { search } from "./actions";
 import { Link } from "react-router-dom";
-import { Track } from "./Track";
+import { Track } from "./components/Track";
 
 export function Search(props) {
   const dispatch = useDispatch();

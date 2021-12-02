@@ -35,9 +35,9 @@
 .searchbar form {
   background-color: #114880;
   width: 35vw;
-  /* display: flex; */
-  /* flex-direction: row; */
-  /* align-items: center; */
+  display: flex;
+  flex-direction: row;
+  align-items: center;
   justify-content: flex-start;
   flex-wrap: nowrap;
   border-radius: 15px;
@@ -48,4 +48,59 @@
   margin-left: 5%;
   width: 50%;
   height: 30px;
+}
+
+.body {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  height: 100%;
+  width: 100%;
+}
+
+.card-list {
+  /* border: solid 1px black; */
+}
+
+.card-list div {
+  padding-left: 5px;
+  padding-right: 5px;
+  padding-bottom: 10px;
+}
+
+.body {
+  border: solid 5px orange;
+}
+
+.card-display {
+  border: solid 2px rgb(136, 133, 133);
+  margin: 0 auto;
+  padding: 10px;
+}
+
+.track-display {
+  justify-content: space-between;
+  margin-top: 7px;
+  /* border-radius: 15px; */
+  margin-left: auto;
+  margin-right: auto;
+  border-bottom: 0.2px solid rgb(102, 102, 102);
+}
+
+.top-heading {
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+
+.track-name {
+  font-size: 11px;
+  margin-top: auto;
+  margin-bottom: auto;
+  margin-right: 10px;
+  font-weight: bold;
+}
+
+.track-artist {
+  font-size: 10px;
 }

@@ -83,6 +83,25 @@ export function loadTopArtistsAction(topArtists) {
 
 export function loadTopTags() {
   const url = `https://ws.audioscrobbler.com/2.0/?method=chart.gettoptags&api_key=${API_KEY}&format=json`;
+
+  return (dispatch) => {
+    fetch(url, {
+      "content-type": "application/json",
+    })
+      .then(assertResponse)
+      .then((response) => response.json())
+      .then((data) => {
+        dispatch(loadTopTagsAction(data.tags.tag));
+      })
+      .catch((e) => console.error(e));
+  };
+}
+
+export function loadTopTagsAction(topTags) {
+  return {
+    type: Action.LoadTopTags,
+    payload: topTags,
+  };
 }
 
 function assertResponse(response) {
