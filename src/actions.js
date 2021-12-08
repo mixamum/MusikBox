@@ -9,6 +9,10 @@ export const Action = Object.freeze({
   LoadSearch: "LoadSearch",
   LoadTopArtists: "LoadTopArtists",
   LoadTopTags: "LoadTopTags",
+  GetTrackInfo: "GetTrackInfo",
+  FinishAddingFavorites: "FinishAddingFavorites",
+  RemoveFave: "RemoveFave",
+  // StartLoadingFaves: "StartLoadingFaves",
 });
 
 export function search(keyword) {
@@ -20,7 +24,7 @@ export function search(keyword) {
       .then(assertResponse)
       .then((response) => response.json())
       .then((data) => {
-        console.log(data.results.trackmatches.track);
+        console.log("it is searching", data); //.results.trackmatches.track);
         dispatch(loadSearch(data.results.trackmatches.track));
       })
       .catch((e) => console.error(e));
@@ -44,7 +48,7 @@ export function loadTopTracks() {
       .then(assertResponse)
       .then((response) => response.json())
       .then((data) => {
-        console.log(data.tracks.track);
+        // console.log(data.tracks.track);
         dispatch(loadTopAction(data.tracks.track));
       })
       .catch((e) => console.error(e));
@@ -67,7 +71,7 @@ export function loadTopArtists() {
       .then(assertResponse)
       .then((response) => response.json())
       .then((data) => {
-        console.log(data.artists.artist);
+        // console.log(data.artists.artist);
         dispatch(loadTopArtistsAction(data.artists.artist));
       })
       .catch((e) => console.error(e));
@@ -103,6 +107,117 @@ export function loadTopTagsAction(topTags) {
     payload: topTags,
   };
 }
+
+// export function startAddingFavorites()
+
+export function getTrackInfo(name, artist) {
+  const url = `http://ws.audioscrobbler.com/2.0/?method=track.getInfo&api_key=${API_KEY}&artist=${name}&track=${artist}&format=json`;
+  return (dispatch) => {
+    fetch(url, {
+      "content-type": "application/json",
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data.album);
+        dispatch(loadGetTrackInfo(data.album));
+      })
+      .catch((e) => console.error(e));
+  };
+}
+
+export function loadGetTrackInfo(album) {
+  return {
+    type: Action.GetTrackInfo,
+    payload: album,
+  };
+}
+
+export function startAddingFavorites(name, artist) {
+  const track = {
+    song_name: name,
+    artist_name: artist,
+  };
+
+  // console.log(JSON.stringify(track));
+
+  const options = {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(track),
+  };
+
+  return (dispatch) => {
+    fetch(`https://project2.mixamum.me:8443/songs/`, options)
+      .then(assertResponse)
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.ok) {
+          dispatch(finishAddingFavorites(track));
+        }
+      })
+      .catch((e) => console.error(e));
+  };
+}
+
+export function finishAddingFavorites(track) {
+  return {
+    type: Action.FinishAddingFavorites,
+    payload: track,
+  };
+}
+
+export function startLoadingFaves() {
+  const url = `https://project2.mixamum.me:8443/songs/`;
+
+  const options = {
+    method: "GET",
+  };
+
+  return (dispatch) => {
+    fetch(url, options)
+      .then(assertResponse)
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.ok) {
+          console.log(data.results);
+          dispatch(finishAddingFavorites(data));
+        }
+      })
+      .catch((e) => console.error(e));
+  };
+}
+
+export function startDeleteFave(id) {
+  console.log("working", id);
+
+  const url = `https://project2.mixum.me:8443/songs/:id`;
+  const options = {
+    method: "DELETE",
+  };
+
+  return (dispatch) => {
+    fetch(url, options)
+      .then(assertResponse)
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.ok) {
+          dispatch(removeItem(id));
+        }
+      })
+      .catch((e) => console.error(e));
+  };
+}
+
+export const removeItem = (id) => {
+  console.log(id);
+
+  return {
+    type: Action.RemoveFave,
+    id: id,
+  };
+};
 
 function assertResponse(response) {
   if (response.status >= 200 || response.status < 300) {

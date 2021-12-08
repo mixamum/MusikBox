@@ -6,6 +6,8 @@ export const initialState = {
   topTags: [],
   latests: [],
   search: [],
+  trackInfo: [],
+  favorites: [],
   // loadingSearch: true,
 };
 
@@ -33,6 +35,23 @@ function reducer(state = initialState, action) {
       return {
         ...state,
         topTags: action.payload,
+      };
+
+    case Action.GetTrackInfo:
+      return {
+        ...state,
+        trackInfo: action.payload,
+      };
+
+    case Action.FinishAddingFavorites:
+      return {
+        ...state,
+        favorites: action.payload,
+      };
+
+    case Action.RemoveFave:
+      return {...state,
+        favorites: state.favorites.filter((f) => f !== action.id)
       };
 
     default:

@@ -1,23 +1,20 @@
 import React from "react";
-import "./Search.css";
-import { useDispatch } from "react-redux";
-import { search } from "./actions";
 import { Link } from "react-router-dom";
-import { Track } from "./components/Track";
+import { FaveTrack } from "./FaveTrack";
+import { useDispatch } from "react-redux";
+import { search } from "../actions";
 
-export function Search(props) {
+export function Liked(props) {
+  let faveSongs = props.liked.results;
+  console.log(faveSongs);
+
   const dispatch = useDispatch();
-  var searc = props.search;
   const onSearch = () => {
-    dispatch(search());
+    dispatch(search(document.getElementById("textbox").value));
   };
-  if (searc === undefined) {
-    searc = JSON.parse(localStorage.getItem("search"));
-  } else {
-    localStorage.setItem("search", JSON.stringify(searc));
-  }
+
   return (
-    <>
+    <div className="searchResults">
       <div className="top">
         <div className="musicImg">
           <a href="/home">
@@ -58,11 +55,11 @@ export function Search(props) {
       <div className="body">
         <div className="card-display">
           <h2 id="search-title">Search Results</h2>
-          {searc?.map((song) => (
-            <Track track={song} />
+          {faveSongs?.map((track) => (
+            <FaveTrack track={track} />
           ))}
         </div>
       </div>
-    </>
+    </div>
   );
 }

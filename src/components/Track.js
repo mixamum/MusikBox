@@ -1,44 +1,52 @@
 import React from "react";
-const API_KEY = "fc5224d11277010e2fd758dd37ad3150";
+import { useDispatch } from "react-redux";
+import { startAddingFavorites } from "../actions";
+import { Link } from "react-router-dom";
 
 export function Track(props) {
   const track = props.track;
-  let length = "";
+  const dispatch = useDispatch();
+
   //   const baseURL = "https://coverartarchive.org/release/";
-  //   const unavailable =
-  //     "https://d32qys9a6wm9no.cloudfront.net/images/movies/poster/500x735.png";
 
-  // const trackInfo = useSelector((state) => state.trackInfo);
-  function trackInfo() {
-    const url = `http://ws.audioscrobbler.com/2.0/?method=track.getInfo&api_key=${API_KEY}&artist=${track.name}&track=${track.artist.name}&format=json`;
-    fetch(url, {
-      "content-type": "application/json",
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        console.log(data.track.duration);
-        length = data.track.duration;
-      })
-      .catch((e) => console.error(e));
-  }
+  const addFave1 = () => {
+    dispatch(startAddingFavorites(track.name, track.artist.name));
+  };
 
-  console.log(trackInfo());
+  const addFave2 = () => {
+    dispatch(startAddingFavorites(track.name, track.artist));
+  };
 
   if (!track.artist.name) {
     return (
       <div className="track-display">
         {/* <img src={baseURL + track.mbid} alt={track.name}></img> */}
-        <p className="track-name">{track.name}</p>
-        <p className="track-artist">{track.artist}</p>
+        <div className="track-info">
+          <Link to={`/search/${track.name}`}>
+            <p className="track-name">{track.name}</p>
+          </Link>
+          <p className="track-artist">{track.artist}</p>
+        </div>
+        <div className="fave-button">
+          <button className="addFave" onClick={addFave2}>
+            &#11088;
+          </button>
+        </div>
       </div>
     );
   } else {
     return (
       <div className="track-display">
-        {/* <img src={unavailable} alt={track.name}></img> */}
-        <p className="track-name">{track.name}</p>
-        <p className="track-artist">{track.artist.name}</p>
-        <p></p>
+        {/* <img src={baseURL + track.mbid} alt={track.name}></img> */}
+        <div className="track-info">
+          <p className="track-name">{track.name}</p>
+          <p className="track-artist">{track.artist.name}</p>
+        </div>
+        <div className="fave-button">
+          <button className="addFave" onClick={addFave1}>
+            &#11088;
+          </button>
+        </div>
       </div>
     );
   }

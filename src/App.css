@@ -1,27 +1,38 @@
-/* .App {
-  height: 100vh;
-  width: 100vw;
-  background-color: rgb(168, 173 182);
-  display: flex;
-  flex-direction: row;
-  place-items: center;
-} */
+.App {
+  /* background: linear-gradient(
+    to bottom,
+    rgb(153, 83, 233),
+    #4749da,
+    rgb(23, 1, 143)
+  ); */
 
-.top img {
-  margin-left: 10vh;
-  margin-top: 8px;
-  margin-bottom: 8px;
-  margin-right: 5%;
+  background: rgb(182, 182, 182);
+}
+
+.musikBoxLogo {
+  width: 60%;
+  height: 60%;
+  color: white;
+}
+
+.musicImg {
+  display: flex;
+  justify-content: flex-end;
+  margin-right: 8px;
 }
 .top {
-  background: linear-gradient(
+  /* background: linear-gradient(
     to left,
     rgb(23, 1, 143),
     #4749da,
     rgb(153, 83, 233)
-  );
-  display: flex;
-  flex-direction: row;
+  ); */
+  /* background: rgb(23, 1, 143); */
+  background: black;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+
+  /* flex-direction: row; */
 }
 
 .searchbar {
@@ -33,7 +44,8 @@
 }
 
 .searchbar form {
-  background-color: #114880;
+  /* background-color: #114880; */
+  background-color: black;
   width: 35vw;
   display: flex;
   flex-direction: row;
@@ -42,18 +54,24 @@
   flex-wrap: nowrap;
   border-radius: 15px;
   border-style: solid;
+  margin-top: 5px;
+  margin-bottom: 5px;
 }
 
 .searchbar input {
-  margin-left: 5%;
-  width: 50%;
-  height: 30px;
+  width: 100% !important;
+  height: 30px !important;
+  border-radius: 5px !important;
 }
 
+/* .searchbar #textbox {
+  height: 25px;
+} */
+
 .body {
-  display: grid;
+  /* display: grid;
   grid-template-columns: repeat(2, 1fr);
-  grid-template-rows: repeat(2, 1fr);
+  grid-template-rows: repeat(2, 1fr); */
   height: 100%;
   width: 100%;
 }
@@ -69,13 +87,22 @@
 }
 
 .body {
-  border: solid 5px orange;
+  /* border: solid 5px orange; */
 }
 
 .card-display {
-  border: solid 2px rgb(136, 133, 133);
-  margin: 0 auto;
+  background: white !important;
+  border: solid 4px rgb(112, 112, 112);
+  /* margin: 0 auto; */
   padding: 10px;
+  width: 35%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 10px;
+}
+
+.card-display h2 {
+  border-bottom: 1px solid rgb(102, 102, 102);
 }
 
 .track-display {
@@ -84,7 +111,9 @@
   /* border-radius: 15px; */
   margin-left: auto;
   margin-right: auto;
-  border-bottom: 0.2px solid rgb(102, 102, 102);
+  border-bottom: 1px solid rgb(102, 102, 102);
+  display: flex;
+  /* width: 40%; */
 }
 
 .top-heading {
@@ -103,4 +132,32 @@
 
 .track-artist {
   font-size: 10px;
+}
+
+footer {
+  padding-top: 2px;
+  padding-bottom: 2px;
+  background-color: black;
+  color: #ddd;
+}
+
+.addFave {
+  background: none;
+  font-size: 20px;
+  border: none;
+  /* border: 0.4px solid black; */
+  border-radius: 10px;
+}
+
+.addFave:hover {
+  font-size: 22px;
+  text-shadow: 0 0 15px #00aced;
+  transition: all 0.5s ease;
+}
+
+.addFave:active {
+  transform: translateZ(10px);
+  /* box-shadow: (x-value) (y-value) (blur value) (spread value) (color); */
+  /* text-shadow: 0 0 20px #00aced;
+  transition: all 1s ease; */
 }
