@@ -50,8 +50,9 @@ function reducer(state = initialState, action) {
       };
 
     case Action.RemoveFave:
-      return {...state,
-        favorites: state.favorites.filter((f) => f !== action.id)
+      return {
+        ...state,
+        favorites: state.favorites.filter((f) => f !== action.id),
       };
 
     default:

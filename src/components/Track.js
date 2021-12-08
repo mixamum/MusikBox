@@ -17,6 +17,7 @@ export function Track(props) {
     dispatch(startAddingFavorites(track.name, track.artist));
   };
 
+  //Search Return
   if (!track.artist.name) {
     return (
       <div className="track-display">

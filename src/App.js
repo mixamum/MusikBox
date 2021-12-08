@@ -40,21 +40,19 @@ function App() {
     // ev.stopPropagation();
     dispatch(search(document.getElementById("textbox").value));
   };
+
+  // const title = () => {
+  // const name = props.match.params.name;
+  // const track = s.find((t) => t.name === name);
+  // return <TrackInfo />;
+  // };
+
   return (
     <div className="App">
       <Routes>
         <Route exact path="/search" element={<Search search={s} />} />
         <Route exact path="/favorites" element={<Liked liked={faves} />} />
-
-        <Route
-          exact
-          path="/search/:title/"
-          element={(props) => {
-            const name = props.match.params.name;
-            const track = s.find((t) => t.name === name);
-            return <TrackInfo track={track} />;
-          }}
-        />
+        <Route exact path="/search/:title/" element={<TrackInfo />} />
         <Route
           exact
           path="/home"
