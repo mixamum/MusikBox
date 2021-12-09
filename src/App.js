@@ -64,12 +64,12 @@ function App() {
 
         <Route
           exact
-          path="/home"
+          path="/"
           element={
             <>
               <div className="top">
                 <div className="musicImg">
-                  <a href="/home">
+                  <a href="/">
                     <img
                       src="https://fontmeme.com/permalink/211201/bd015b696b227484ae3a61754921fef7.png"
                       alt="MusikBox"
