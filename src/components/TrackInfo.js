@@ -42,7 +42,6 @@ export function TrackInfo() {
   // console.log(info);
   // const albumImg = trackI.album.image;
   console.log(trackI);
-  // console.log(trackI.album.image);
   // console.log(albumImg[1]);
   return (
     <div>
