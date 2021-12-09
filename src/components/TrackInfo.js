@@ -1,56 +1,44 @@
-import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
-import { getTrackInfo } from "../actions";
-
-// export function getJsonTrackInfo(name, artist) {
-//   return fetch(
-//     `https://ws.audioscrobbler.com/2.0/?method=track.getInfo&api_key=fc5224d11277010e2fd758dd37ad3150&artist=${artist}&track=${name}&format=json`,
-//     {
-//       headers: { "Content-Type": "application/json" },
-//     }
-//   )
-//     .then((response) => response.json())
-//     .then((responseJson) => {
-//       console.log(responseJson.track);
-//       return responseJson.track;
-//     })
-//     .catch((e) => console.error(e));
-// }
+import React from "react";
+import { useSelector } from "react-redux";
 
 export function TrackInfo() {
-  // const addFave1 = () => {
-  //   dispatch(startAddingFavorites(track.name, track.artist.name));
-  // };
+  // const s = useSelector((state) => state.search);
+  // const params = useParams();
+  // const track = s.find((t) => t.name === params.title);
 
-  // const addFave2 = () => {
-  //   dispatch(startAddingFavorites(track.name, track.artist));
-  // };
+  const info = useSelector((state) => state.trackInfo);
 
-  const s = useSelector((state) => state.search);
-  const params = useParams();
-  const track = s.find((t) => t.name === params.title);
+  // console.log(albumImg[2]["#text"]);
 
-  const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(getTrackInfo());
-  }, [dispatch]);
+  if (!info.wiki) {
+    return (
+      <div>
+        <h1>{info.name}</h1>
+        <p>{info.artist.name}</p>
+      </div>
+    );
+  } else if (!info.album.image) {
+    return (
+      <div>
+        <h1>{info.name}</h1>
+        <p>{info.artist.name}</p>
+        <p>{info.wiki.content}</p>
+        <p>{info.wiki.published}</p>
+        <p>{info.wiki.summary}</p>
+      </div>
+    );
+  } else {
+    const albumImg = info.album.image;
 
-  const trackI = useSelector((state) => state.trackInfo);
-
-  // const info = useSelector((state) => state.trackInfo);
-  // console.log(info);
-  // const albumImg = trackI.album.image;
-  console.log(trackI);
-  // console.log(albumImg[1]);
-  return (
-    <div>
-      {/* <h1>{trackI.name}</h1>
-      <p>{trackI.artist.name}</p>
-      <p>{trackI.wiki.content}</p>
-      <p>{trackI.wiki.published}</p>
-      <p>{trackI.wiki.summary}</p> */}
-      {/* <img src={trackI.album.image}></img> */}
-    </div>
-  );
+    return (
+      <div>
+        <h1>{info.name}</h1>
+        <p>{info.artist.name}</p>
+        <p>{info.wiki.content}</p>
+        <p>{info.wiki.published}</p>
+        <p>{info.wiki.summary}</p>
+        <img src={albumImg[2]["#text"]} alt="Album Cover"></img>
+      </div>
+    );
+  }
 }

@@ -21,9 +21,9 @@ export function Track(props) {
     dispatch(getTrackInfo(track.name, track.artist));
   };
 
-  // useEffect(() => {
-  //   dispatch(getTrackInfo(track.name, track.artist));
-  // }, [dispatch, track.artist, track.name]);
+  useEffect(() => {
+    dispatch(getTrackInfo(track.name, track.artist));
+  }, [dispatch, track.artist, track.name]);
 
   //Search Return
   if (!track.artist.name) {

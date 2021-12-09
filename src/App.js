@@ -7,7 +7,6 @@ import {
   loadTopTracks,
   loadTopArtists,
   loadTopTags,
-  getTrackInfo,
   startLoadingFaves,
 } from "./actions";
 import { Link, Routes, Route } from "react-router-dom";
@@ -15,19 +14,29 @@ import { Track } from "./components/Track";
 import React, { useEffect } from "react";
 import { Liked } from "./components/Liked";
 import { TrackInfo } from "./components/TrackInfo";
+import { Spinner } from "react-bootstrap";
 
 // import { Artist } from "./components/Artist";
 // import { Tag } from "./components/Tag";
 
+function Loading(props) {
+  if (props.load) {
+    return (
+      <Spinner className="loadingspin" animation="border" role="status">
+        <span className="sr-only">Loading...</span>
+      </Spinner>
+    );
+  } else {
+    return null;
+  }
+}
+
 function App() {
-  // const song = useSelector((state) => state.songs);
-  const topTracks = useSelector((state) => state.topTracks);
   // const topTags = useSelector((state) => state.topTags);
-  // console.log(topTracks);
+
+  const topTracks = useSelector((state) => state.topTracks);
   const s = useSelector((state) => state.search);
   const faves = useSelector((state) => state.favorites);
-  // const trackInfo = useSelector((state) => state.trackInfo);
-  // console.log(trackInfo);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(loadTopTracks());
@@ -43,11 +52,8 @@ function App() {
     dispatch(search(document.getElementById("textbox").value));
   };
 
-  // const title = () => {
-  // const name = props.match.params.name;
-  // const track = s.find((t) => t.name === name);
-  // return <TrackInfo />;
-  // };
+  //For Loading Purposes
+  const loadingTop = useSelector((state) => state.loadingTop);
 
   return (
     <div className="App">
@@ -55,6 +61,7 @@ function App() {
         <Route exact path="/search" element={<Search search={s} />} />
         <Route exact path="/favorites" element={<Liked liked={faves} />} />
         <Route exact path="/search/:title/" element={<TrackInfo />} />
+
         <Route
           exact
           path="/home"
@@ -88,7 +95,6 @@ function App() {
                         onClick={onSearch}
                         src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSwmiHfL1W75k3vCuOSfQh-hL4y6M-D3__C_A&usqp=CAU"
                       />
-                      {/* <i class="bi bi-search"></i> */}
                     </Link>
                   </form>
                 </div>
@@ -101,6 +107,8 @@ function App() {
               <div className="body">
                 <div className="card-display">
                   <h2 className="top-heading">Top Tracks</h2>
+                  <Loading load={loadingTop} />
+
                   {/* <div className="card-list"> */}
                   {topTracks?.map((track) => (
                     <Track track={track} />

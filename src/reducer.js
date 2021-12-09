@@ -7,22 +7,28 @@ export const initialState = {
   latests: [],
   search: [],
   trackInfo: [],
-  favorites: [],
+  favorites: {},
+  loadingSearch: true,
+  loadingTop: true,
+  loadingFave: true,
+  loadingTrack: true,
   // loadingSearch: true,
 };
 
 function reducer(state = initialState, action) {
+  // console.log(action);
   switch (action.type) {
     case Action.LoadSearch:
       return {
         ...state,
         search: action.payload,
-        // loadingSearch: false,
+        loadingSearch: false,
       };
     case Action.LoadTopTracks:
       return {
         ...state,
         topTracks: action.payload,
+        loadingTop: false,
       };
 
     case Action.LoadTopArtists:
@@ -47,12 +53,14 @@ function reducer(state = initialState, action) {
       return {
         ...state,
         favorites: action.payload,
+        loadingFave: false,
       };
 
     case Action.RemoveFave:
+      console.log(state.favorites.results);
       return {
         ...state,
-        favorites: state.favorites.filter((f) => f !== action.id),
+        favorites: state.favorites.results.filter((f) => f !== action.id),
       };
 
     default:

@@ -190,7 +190,7 @@ export function startLoadingFaves() {
 export function startDeleteFave(id) {
   console.log("working", id);
 
-  const url = `https://project2.mixum.me:8443/songs/:id`;
+  const url = `https://project2.mixamum.me:8443/songs/${id}`;
   const options = {
     method: "DELETE",
   };
