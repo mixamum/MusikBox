@@ -16,7 +16,7 @@ export const Action = Object.freeze({
 });
 
 export function search(keyword) {
-  const url = `http://ws.audioscrobbler.com/2.0/?method=track.search&track=${keyword}&api_key=${API_KEY}&format=json`;
+  const url = `https://ws.audioscrobbler.com/2.0/?method=track.search&track=${keyword}&api_key=${API_KEY}&format=json`;
   return (dispatch) => {
     fetch(url, {
       "content-type": "application/json",
@@ -40,7 +40,7 @@ export function loadSearch(search) {
 }
 
 export function loadTopTracks() {
-  const url = `http://ws.audioscrobbler.com/2.0/?method=chart.gettoptracks&api_key=${API_KEY}&format=json`;
+  const url = `https://ws.audioscrobbler.com/2.0/?method=chart.gettoptracks&api_key=${API_KEY}&format=json`;
   return (dispatch) => {
     fetch(url, {
       "content-type": "application/json",
@@ -63,7 +63,7 @@ export function loadTopAction(topTracks) {
 }
 
 export function loadTopArtists() {
-  const url = `http://ws.audioscrobbler.com/2.0/?method=chart.gettopartists&api_key=${API_KEY}&format=json`;
+  const url = `https://ws.audioscrobbler.com/2.0/?method=chart.gettopartists&api_key=${API_KEY}&format=json`;
   return (dispatch) => {
     fetch(url, {
       "content-type": "application/json",
@@ -109,7 +109,7 @@ export function loadTopTagsAction(topTags) {
 }
 
 export function getTrackInfo(name, artist) {
-  const url = `http://ws.audioscrobbler.com/2.0/?method=track.getInfo&api_key=${API_KEY}&artist=${artist}&track=${name}&format=json`;
+  const url = `https://ws.audioscrobbler.com/2.0/?method=track.getInfo&api_key=${API_KEY}&artist=${artist}&track=${name}&format=json`;
   return (dispatch) => {
     fetch(url, {
       "content-type": "application/json",
