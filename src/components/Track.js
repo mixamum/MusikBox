@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { startAddingFavorites } from "../actions";
+import { getTrackInfo, startAddingFavorites } from "../actions";
 import { Link } from "react-router-dom";
 
 export function Track(props) {
@@ -17,13 +17,21 @@ export function Track(props) {
     dispatch(startAddingFavorites(track.name, track.artist));
   };
 
+  const getTI = () => {
+    dispatch(getTrackInfo(track.name, track.artist));
+  };
+
+  // useEffect(() => {
+  //   dispatch(getTrackInfo(track.name, track.artist));
+  // }, [dispatch, track.artist, track.name]);
+
   //Search Return
   if (!track.artist.name) {
     return (
       <div className="track-display">
         {/* <img src={baseURL + track.mbid} alt={track.name}></img> */}
         <div className="track-info">
-          <Link to={`/search/${track.name}`}>
+          <Link to={`/search/${track.name}`} onClick={getTI}>
             <p className="track-name">{track.name}</p>
           </Link>
           <p className="track-artist">{track.artist}</p>

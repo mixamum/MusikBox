@@ -108,18 +108,16 @@ export function loadTopTagsAction(topTags) {
   };
 }
 
-// export function startAddingFavorites()
-
 export function getTrackInfo(name, artist) {
-  const url = `http://ws.audioscrobbler.com/2.0/?method=track.getInfo&api_key=${API_KEY}&artist=${name}&track=${artist}&format=json`;
+  const url = `http://ws.audioscrobbler.com/2.0/?method=track.getInfo&api_key=${API_KEY}&artist=${artist}&track=${name}&format=json`;
   return (dispatch) => {
     fetch(url, {
       "content-type": "application/json",
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log(data.album);
-        dispatch(loadGetTrackInfo(data.album));
+        console.log(data.track);
+        dispatch(loadGetTrackInfo(data.track));
       })
       .catch((e) => console.error(e));
   };

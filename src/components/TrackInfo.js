@@ -3,23 +3,20 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { getTrackInfo } from "../actions";
 
-function getJsonTrackInfo(name, artist) {
-  return (
-    fetch(
-      `https://ws.audioscrobbler.com/2.0/?method=track.getInfo&api_key=fc5224d11277010e2fd758dd37ad3150&artist=${artist}&track=${name}&format=json`,
-      {
-        credentials: "include",
-        headers: { "Content-Type": "application/json" },
-      }
-    )
-      .then((result) => console.log("success======:", result))
-      // .then((response) => response.json())
-      // .then((responseJson) => {
-      //   return responseJson.track;
-      // })
-      .catch((e) => console.error(e))
-  );
-}
+// export function getJsonTrackInfo(name, artist) {
+//   return fetch(
+//     `https://ws.audioscrobbler.com/2.0/?method=track.getInfo&api_key=fc5224d11277010e2fd758dd37ad3150&artist=${artist}&track=${name}&format=json`,
+//     {
+//       headers: { "Content-Type": "application/json" },
+//     }
+//   )
+//     .then((response) => response.json())
+//     .then((responseJson) => {
+//       console.log(responseJson.track);
+//       return responseJson.track;
+//     })
+//     .catch((e) => console.error(e));
+// }
 
 export function TrackInfo() {
   // const addFave1 = () => {
@@ -34,15 +31,27 @@ export function TrackInfo() {
   const params = useParams();
   const track = s.find((t) => t.name === params.title);
 
-  const trackI = getJsonTrackInfo(track.name, track.artist);
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getTrackInfo());
+  }, [dispatch]);
 
-  // useEffect(() => {
-  //   dispatch(getTrackInfo(track.name, track.artist));
-  // }, [dispatch, track.artist, track.name]);
+  const trackI = useSelector((state) => state.trackInfo);
 
   // const info = useSelector((state) => state.trackInfo);
   // console.log(info);
-
-  return <div>{trackI.name}</div>;
+  // const albumImg = trackI.album.image;
+  console.log(trackI);
+  // console.log(trackI.album.image);
+  // console.log(albumImg[1]);
+  return (
+    <div>
+      {/* <h1>{trackI.name}</h1>
+      <p>{trackI.artist.name}</p>
+      <p>{trackI.wiki.content}</p>
+      <p>{trackI.wiki.published}</p>
+      <p>{trackI.wiki.summary}</p> */}
+      {/* <img src={trackI.album.image}></img> */}
+    </div>
+  );
 }

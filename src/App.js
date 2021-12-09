@@ -26,12 +26,14 @@ function App() {
   // console.log(topTracks);
   const s = useSelector((state) => state.search);
   const faves = useSelector((state) => state.favorites);
+  // const trackInfo = useSelector((state) => state.trackInfo);
+  // console.log(trackInfo);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(loadTopTracks());
     dispatch(loadTopArtists());
     dispatch(loadTopTags());
-    dispatch(getTrackInfo());
+    // dispatch(getTrackInfo());
     dispatch(startLoadingFaves());
     dispatch(search(document.getElementById("textbox").value));
   }, [dispatch]);
