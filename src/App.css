@@ -20,6 +20,10 @@
   justify-content: flex-end;
   margin-right: 8px;
 }
+
+.musicImg img {
+  margin-top: 10px;
+}
 .top {
   /* background: linear-gradient(
     to left,
@@ -68,26 +72,42 @@
   height: 25px;
 } */
 
+.favorites button {
+  margin-top: 15px;
+  margin-left: 10px;
+  height: 30px;
+  width: 20%;
+  border: 2px solid orange;
+  border-radius: 10px;
+}
+
+.searchField {
+  height: 30px;
+}
+
+.loadingspin {
+  display: flex;
+  justify-content: center;
+}
+
 .body {
   /* display: grid;
   grid-template-columns: repeat(2, 1fr);
   grid-template-rows: repeat(2, 1fr); */
-  height: 100%;
-  width: 100%;
+  /* height: 100%; */
+  /* width: 100%; */
+  background: rgb(182, 182, 182);
 }
 
 .card-list {
   /* border: solid 1px black; */
+  height: 500px;
 }
 
 .card-list div {
   padding-left: 5px;
   padding-right: 5px;
   padding-bottom: 10px;
-}
-
-.body {
-  /* border: solid 5px orange; */
 }
 
 .card-display {
@@ -160,4 +180,12 @@ footer {
   /* box-shadow: (x-value) (y-value) (blur value) (spread value) (color); */
   /* text-shadow: 0 0 20px #00aced;
   transition: all 1s ease; */
+}
+
+.search-title {
+  text-align: center;
+}
+
+footer p {
+  text-align: center;
 }

@@ -20,9 +20,9 @@ export function Search(props) {
     <>
       <div className="top">
         <div className="musicImg">
-          <a href="/home">
+          <a href="/">
             <img
-              src="https://fontmeme.com/permalink/211201/bd015b696b227484ae3a61754921fef7.png"
+              src="https://fontmeme.com/permalink/211210/5d85ec547aa9615c6c345a53243f6bfb.png"
               alt="MusikBox"
               border="0"
               width="15%"

@@ -33,7 +33,7 @@ function Loading(props) {
 
 function App() {
   // const topTags = useSelector((state) => state.topTags);
-
+  // const topArtists = useSelector((state) => state.topArtists);
   const topTracks = useSelector((state) => state.topTracks);
   const s = useSelector((state) => state.search);
   const faves = useSelector((state) => state.favorites);
@@ -71,7 +71,7 @@ function App() {
                 <div className="musicImg">
                   <a href="/">
                     <img
-                      src="https://fontmeme.com/permalink/211201/bd015b696b227484ae3a61754921fef7.png"
+                      src="https://fontmeme.com/permalink/211210/5d85ec547aa9615c6c345a53243f6bfb.png"
                       alt="MusikBox"
                       border="0"
                       width="15%"
@@ -86,6 +86,7 @@ function App() {
                       id="textbox"
                       placeholder="Search..."
                       name="search"
+                      className="searchField"
                     ></input>
                     <Link to={`/search/`}>
                       <input

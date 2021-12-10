@@ -1,0 +1,25 @@
+/* * {
+  background: rgb(182, 182, 182);
+} */
+
+.Song-Name {
+  text-align: center;
+}
+
+.Artist-Name {
+  text-align: center;
+}
+
+.body {
+  display: flex;
+  margin: 10px, 10px, 10px, 10px;
+}
+
+.musicInfo {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.Artist-Name {
+  font-weight: bold;
+}

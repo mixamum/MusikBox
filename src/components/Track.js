@@ -21,6 +21,10 @@ export function Track(props) {
     dispatch(getTrackInfo(track.name, track.artist));
   };
 
+  const getTI2 = () => {
+    dispatch(getTrackInfo(track.name, track.artist.name));
+  };
+
   useEffect(() => {
     dispatch(getTrackInfo(track.name, track.artist));
   }, [dispatch, track.artist, track.name]);
@@ -29,7 +33,6 @@ export function Track(props) {
   if (!track.artist.name) {
     return (
       <div className="track-display">
-        {/* <img src={baseURL + track.mbid} alt={track.name}></img> */}
         <div className="track-info">
           <Link to={`/search/${track.name}`} onClick={getTI}>
             <p className="track-name">{track.name}</p>
@@ -46,9 +49,10 @@ export function Track(props) {
   } else {
     return (
       <div className="track-display">
-        {/* <img src={baseURL + track.mbid} alt={track.name}></img> */}
         <div className="track-info">
+          {/* <Link to={`/search/${track.name}`} onClick={getTI2}> */}
           <p className="track-name">{track.name}</p>
+          {/* </Link> */}
           <p className="track-artist">{track.artist.name}</p>
         </div>
         <div className="fave-button">
