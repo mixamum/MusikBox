@@ -56,10 +56,12 @@
 .favorites button {
   margin-top: 15px;
   margin-left: 10px;
-  height: 30px;
+  height: 32px;
   width: 20%;
-  border: 2px solid orange;
-  border-radius: 10px;
+  border: 1px solid orange;
+  /* border-radius: 10px; */
+  background: rgb(153, 103, 11);
+  color: black;
 }
 
 .searchField {

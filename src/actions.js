@@ -209,14 +209,13 @@ export const removeItem = (id) => {
 };
 
 export function getTopSongsByArtist(artist) {
-  const url = `http://ws.audioscrobbler.com/2.0/?method=artist.gettoptracks&artist=${artist}&api_key=${API_KEY}&format=json`;
+  const url = `https://ws.audioscrobbler.com/2.0/?method=artist.gettoptracks&artist=${artist}&api_key=${API_KEY}&format=json`;
   return (dispatch) => {
     fetch(url, {
       "content-type": "application/json",
     })
       .then((response) => response.json())
       .then((data) => {
-        // console.log(data.toptracks.track);
         dispatch(finishTopSongArtist(data.toptracks.track));
       })
       .catch((e) => console.error(e));
