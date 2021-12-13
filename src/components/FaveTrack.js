@@ -11,7 +11,9 @@ export function FaveTrack(props) {
     dispatch(startLoadingFaves());
   });
 
-  const deleteFave = () => {
+  const deleteFave = (ev) => {
+    ev.preventDefault();
+    ev.stopPropagation();
     dispatch(startDeleteFave(track.id));
     <Navigate to="/favorites" />;
   };
