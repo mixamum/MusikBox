@@ -15,6 +15,7 @@ export const initialState = {
   loadingTrack: true,
   loadingTopByArtist: true,
   loadingTopArtist: true,
+  isWaiting: false,
 };
 
 function reducer(state = initialState, action) {
@@ -65,6 +66,18 @@ function reducer(state = initialState, action) {
         ...state,
         topSongsByArtist: action.payload,
         loadingTopByArtist: false,
+      };
+
+    case Action.StartedWaiting:
+      return {
+        ...state,
+        isWaiting: true,
+      };
+
+    case Action.StoppedWaiting:
+      return {
+        ...state,
+        isWaiting: false,
       };
 
     case Action.RemoveFave:
