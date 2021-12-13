@@ -185,3 +185,33 @@ footer p {
   display: flex;
   justify-content: center;
 }
+
+@media (max-width: 800px) {
+  .card-display {
+    background: white !important;
+    border: solid 4px rgb(112, 112, 112);
+    padding: 10px;
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10px;
+  }
+
+  .favorites button {
+    margin-top: 10px;
+    margin-left: 10px;
+    height: 32px;
+    width: 50%;
+    border: 1px solid orange;
+    /* border-radius: 10px; */
+    background: rgb(153, 103, 11);
+    color: black;
+  }
+
+  .musikBoxLogo {
+    width: 60%;
+    height: 60%;
+    color: white;
+    margin-left: 10px;
+  }
+}
