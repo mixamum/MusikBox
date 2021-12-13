@@ -1,21 +1,14 @@
 import React from "react";
-import "./Search.css";
-import { useDispatch } from "react-redux";
-import { search } from "./actions";
-import { Link } from "react-router-dom";
-import { Track } from "./components/Track";
+import { useSelector } from "react-redux";
+import { Link, useParams } from "react-router-dom";
+import { Track } from "./Track";
 
-export function Search(props) {
-  const dispatch = useDispatch();
-  var searc = props.search;
-  const onSearch = () => {
-    dispatch(search());
-  };
-  if (searc === undefined) {
-    searc = JSON.parse(localStorage.getItem("search"));
-  } else {
-    localStorage.setItem("search", JSON.stringify(searc));
-  }
+function ArtistInfo() {
+  const songs = useSelector((state) => state.topSongsByArtist);
+  const params = useParams();
+  const name = params.name;
+
+  console.log(songs);
   return (
     <>
       <div className="top">
@@ -37,13 +30,14 @@ export function Search(props) {
               id="textbox"
               placeholder="Search..."
               name="search"
+              className="searchField"
             ></input>
             <Link to={`/search/`}>
               <input
                 type="image"
                 alt="Search Button"
                 id="search-button"
-                onClick={onSearch}
+                // onClick={onSearch}
                 src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSwmiHfL1W75k3vCuOSfQh-hL4y6M-D3__C_A&usqp=CAU"
               />
             </Link>
@@ -55,11 +49,19 @@ export function Search(props) {
           </Link>
         </div>
       </div>
+      <div className="sub-bar">
+        <Link to={"/artists"}>
+          <button className="popular-artists">Popular Artists</button>
+        </Link>
+        <button>Music By Genre</button>
+      </div>
       <div className="body">
         <div className="card-display">
-          <h2 id="search-title">Search Results</h2>
-          {searc?.map((song) => (
-            <Track track={song} />
+          <h2 className="top-heading">Top Tracks for {name}</h2>
+          {/* <Loading load={loadingTop} /> */}
+
+          {songs?.map((track) => (
+            <Track track={track} />
           ))}
         </div>
       </div>
@@ -73,3 +75,5 @@ export function Search(props) {
     </>
   );
 }
+
+export default ArtistInfo;

@@ -14,26 +14,13 @@ import { Track } from "./components/Track";
 import React, { useEffect } from "react";
 import { Liked } from "./components/Liked";
 import { TrackInfo } from "./components/TrackInfo";
-import { Spinner } from "react-bootstrap";
-
-// import { Artist } from "./components/Artist";
-// import { Tag } from "./components/Tag";
-
-function Loading(props) {
-  if (props.load) {
-    return (
-      <Spinner className="loadingspin" animation="border" role="status">
-        <span className="sr-only">Loading...</span>
-      </Spinner>
-    );
-  } else {
-    return null;
-  }
-}
+import TopArtists from "./components/TopArtists";
+import ArtistInfo from "./components/ArtistInfo";
+import Loading from "./components/LoadingSpinner";
 
 function App() {
   // const topTags = useSelector((state) => state.topTags);
-  // const topArtists = useSelector((state) => state.topArtists);
+  const topArtists = useSelector((state) => state.topArtists);
   const topTracks = useSelector((state) => state.topTracks);
   const s = useSelector((state) => state.search);
   const faves = useSelector((state) => state.favorites);
@@ -42,7 +29,6 @@ function App() {
     dispatch(loadTopTracks());
     dispatch(loadTopArtists());
     dispatch(loadTopTags());
-    // dispatch(getTrackInfo());
     dispatch(startLoadingFaves());
     dispatch(search(document.getElementById("textbox").value));
   }, [dispatch]);
@@ -61,6 +47,12 @@ function App() {
         <Route exact path="/search" element={<Search search={s} />} />
         <Route exact path="/favorites" element={<Liked liked={faves} />} />
         <Route exact path="/search/:title/" element={<TrackInfo />} />
+        <Route exact path="/artists/:name" element={<ArtistInfo />} />
+        <Route
+          exact
+          path="/artists"
+          element={<TopArtists artist={topArtists} />}
+        />
 
         <Route
           exact
@@ -105,25 +97,20 @@ function App() {
                   </Link>
                 </div>
               </div>
+              <div className="sub-bar">
+                <Link to={"/artists"}>
+                  <button className="popular-artists">Popular Artists</button>
+                </Link>
+                <button>Music By Genre</button>
+              </div>
               <div className="body">
                 <div className="card-display">
                   <h2 className="top-heading">Top Tracks</h2>
                   <Loading load={loadingTop} />
-
-                  {/* <div className="card-list"> */}
                   {topTracks?.map((track) => (
                     <Track track={track} />
                   ))}
-                  {/* </div> */}
                 </div>
-                {/* <div className="card-display">
-                  <h2 className="top-heading">Top Artists</h2>
-                  <div className="card-list">
-                    {topArtists.map((artist) => (
-                      <Artist artist={artist} />
-                    ))}
-                  </div>
-                </div> */}
                 {/* <div className="songDisplay">
                   <h2>Top Tags</h2>
                   <div className="card-list">

@@ -2,7 +2,7 @@ const API_KEY = "fc5224d11277010e2fd758dd37ad3150";
 
 export const Action = Object.freeze({
   //   LoadTrendingByName: "LoadTrendingByName",
-  //   LoadTrendingByArtist: "LoadTrendingByArtist",
+  LoadTrendingByArtist: "LoadTrendingByArtist",
   //   LoadTrendingByGenre: "LoadTrendingByGenre",
   //   LoadLatest: "LoadLatest",
   LoadTopTracks: "LoadTopTracks",
@@ -12,6 +12,7 @@ export const Action = Object.freeze({
   GetTrackInfo: "GetTrackInfo",
   FinishAddingFavorites: "FinishAddingFavorites",
   RemoveFave: "RemoveFave",
+
   // StartLoadingFaves: "StartLoadingFaves",
 });
 
@@ -24,7 +25,6 @@ export function search(keyword) {
       .then(assertResponse)
       .then((response) => response.json())
       .then((data) => {
-        console.log("it is searching", data); //.results.trackmatches.track);
         dispatch(loadSearch(data.results.trackmatches.track));
       })
       .catch((e) => console.error(e));
@@ -48,7 +48,6 @@ export function loadTopTracks() {
       .then(assertResponse)
       .then((response) => response.json())
       .then((data) => {
-        // console.log(data.tracks.track);
         dispatch(loadTopAction(data.tracks.track));
       })
       .catch((e) => console.error(e));
@@ -71,7 +70,6 @@ export function loadTopArtists() {
       .then(assertResponse)
       .then((response) => response.json())
       .then((data) => {
-        // console.log(data.artists.artist);
         dispatch(loadTopArtistsAction(data.artists.artist));
       })
       .catch((e) => console.error(e));
@@ -116,7 +114,6 @@ export function getTrackInfo(name, artist) {
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log(data.track);
         dispatch(loadGetTrackInfo(data.track));
       })
       .catch((e) => console.error(e));
@@ -179,7 +176,6 @@ export function startLoadingFaves() {
       .then((response) => response.json())
       .then((data) => {
         if (data.ok) {
-          console.log(data.results);
           dispatch(finishAddingFavorites(data));
         }
       })
@@ -188,8 +184,6 @@ export function startLoadingFaves() {
 }
 
 export function startDeleteFave(id) {
-  console.log("working", id);
-
   const url = `https://project2.mixamum.me:8443/songs/${id}`;
   const options = {
     method: "DELETE",
@@ -209,13 +203,33 @@ export function startDeleteFave(id) {
 }
 
 export const removeItem = (id) => {
-  console.log(id);
-
   return {
     type: Action.RemoveFave,
     id: id,
   };
 };
+
+export function getTopSongsByArtist(artist) {
+  const url = `http://ws.audioscrobbler.com/2.0/?method=artist.gettoptracks&artist=${artist}&api_key=${API_KEY}&format=json`;
+  return (dispatch) => {
+    fetch(url, {
+      "content-type": "application/json",
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        // console.log(data.toptracks.track);
+        dispatch(finishTopSongArtist(data.toptracks.track));
+      })
+      .catch((e) => console.error(e));
+  };
+}
+
+export function finishTopSongArtist(songs) {
+  return {
+    type: Action.LoadTrendingByArtist,
+    payload: songs,
+  };
+}
 
 function assertResponse(response) {
   if (response.status >= 200 || response.status < 300) {

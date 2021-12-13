@@ -1,21 +1,23 @@
 import React from "react";
-import "./Search.css";
 import { useDispatch } from "react-redux";
-import { search } from "./actions";
 import { Link } from "react-router-dom";
-import { Track } from "./components/Track";
+import { search } from "../actions";
+import { Artist } from "./Artist";
 
-export function Search(props) {
+function TopArtists(props) {
+  let artists = props.artist;
+  console.log(artists);
   const dispatch = useDispatch();
-  var searc = props.search;
+  //   const onSearch = () => {
+  //     dispatch(search(document.getElementById("textbox").value));
+  //   };
+
+  //   useEffect(() => {
+  //     dispatch(startLoadingFaves());
+  //   });
   const onSearch = () => {
-    dispatch(search());
+    dispatch(search(document.getElementById("textbox").value));
   };
-  if (searc === undefined) {
-    searc = JSON.parse(localStorage.getItem("search"));
-  } else {
-    localStorage.setItem("search", JSON.stringify(searc));
-  }
   return (
     <>
       <div className="top">
@@ -37,6 +39,7 @@ export function Search(props) {
               id="textbox"
               placeholder="Search..."
               name="search"
+              className="searchField"
             ></input>
             <Link to={`/search/`}>
               <input
@@ -55,13 +58,29 @@ export function Search(props) {
           </Link>
         </div>
       </div>
+      <div className="sub-bar">
+        <Link to={"/artists"}>
+          <button className="popular-artists">Popular Artists</button>
+        </Link>
+        <button>Music By Genre</button>
+      </div>
       <div className="body">
         <div className="card-display">
-          <h2 id="search-title">Search Results</h2>
-          {searc?.map((song) => (
-            <Track track={song} />
+          <h2 className="top-heading">Top Artists</h2>
+          {/* <div className="card-list"> */}
+          {artists.map((artist) => (
+            <Artist artist={artist} />
           ))}
+          {/* </div> */}
         </div>
+        {/* <div className="songDisplay">
+                  <h2>Top Tags</h2>
+                  <div className="card-list">
+                    {topTags.map((tag) => (
+                      <Tag tag={tag} />
+                    ))}
+                  </div>
+                </div> */}
       </div>
       <footer>
         <p>
@@ -73,3 +92,5 @@ export function Search(props) {
     </>
   );
 }
+
+export default TopArtists;

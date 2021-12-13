@@ -3,6 +3,7 @@ import { Action } from "./actions";
 export const initialState = {
   topTracks: [],
   topArtists: [],
+  topSongsByArtist: [],
   topTags: [],
   latests: [],
   search: [],
@@ -12,7 +13,8 @@ export const initialState = {
   loadingTop: true,
   loadingFave: true,
   loadingTrack: true,
-  // loadingSearch: true,
+  loadingTopByArtist: true,
+  loadingTopArtist: true,
 };
 
 function reducer(state = initialState, action) {
@@ -35,13 +37,14 @@ function reducer(state = initialState, action) {
       return {
         ...state,
         topArtists: action.payload,
+        loadingTopArtist: false,
       };
 
-    case Action.LoadTopTags:
-      return {
-        ...state,
-        topTags: action.payload,
-      };
+    // case Action.LoadTopTags:
+    //   return {
+    //     ...state,
+    //     topTags: action.payload,
+    //   };
 
     case Action.GetTrackInfo:
       return {
@@ -56,8 +59,15 @@ function reducer(state = initialState, action) {
         loadingFave: false,
       };
 
+    case Action.LoadTrendingByArtist:
+      console.log(action.payload);
+      return {
+        ...state,
+        topSongsByArtist: action.payload,
+        loadingTopByArtist: false,
+      };
+
     case Action.RemoveFave:
-      console.log(state.favorites.results);
       return {
         ...state,
         favorites: state.favorites.results.filter((f) => f !== action.id),

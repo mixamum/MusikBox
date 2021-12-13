@@ -1,16 +1,22 @@
 import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+import { getTopSongsByArtist } from "../actions";
 
 export function Artist(props) {
   const artist = props.artist;
-  //   const baseURL = "https://coverartarchive.org/release/";
-  //   const unavailable =
-  //     "https://d32qys9a6wm9no.cloudfront.net/images/movies/poster/500x735.png";
+  const dispatch = useDispatch();
+
+  const getS = () => {
+    dispatch(getTopSongsByArtist(artist.name));
+  };
 
   return (
-    <div className="artist-display">
-      {/* <img src={baseURL + track.mbid} alt={track.name}></img> */}
-      <p className="artist-name">{artist.name}</p>
-      <p className="artist-listeners">{artist.listeners}</p>
+    <div className="track-display">
+      <Link to={`/artists/${artist.name}`} onClick={getS}>
+        <p className="track-name">{artist.name}</p>
+      </Link>
+      <p className="track-artist">{artist.listeners}</p>
     </div>
   );
 }

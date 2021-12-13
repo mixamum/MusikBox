@@ -5,9 +5,6 @@ import { startDeleteFave, startLoadingFaves } from "../actions";
 
 export function FaveTrack(props) {
   const track = props.track;
-  console.log(track);
-  console.log(track.song_name, track.id);
-
   const dispatch = useDispatch();
 
   useEffect(() => {

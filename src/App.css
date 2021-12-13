@@ -1,12 +1,6 @@
 .App {
-  /* background: linear-gradient(
-    to bottom,
-    rgb(153, 83, 233),
-    #4749da,
-    rgb(23, 1, 143)
-  ); */
-
   background: rgb(182, 182, 182);
+  min-height: 1000px;
 }
 
 .musikBoxLogo {
@@ -25,18 +19,9 @@
   margin-top: 10px;
 }
 .top {
-  /* background: linear-gradient(
-    to left,
-    rgb(23, 1, 143),
-    #4749da,
-    rgb(153, 83, 233)
-  ); */
-  /* background: rgb(23, 1, 143); */
   background: black;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-
-  /* flex-direction: row; */
 }
 
 .searchbar {
@@ -68,10 +53,6 @@
   border-radius: 5px !important;
 }
 
-/* .searchbar #textbox {
-  height: 25px;
-} */
-
 .favorites button {
   margin-top: 15px;
   margin-left: 10px;
@@ -85,22 +66,12 @@
   height: 30px;
 }
 
-.loadingspin {
-  display: flex;
-  justify-content: center;
-}
-
 .body {
-  /* display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  grid-template-rows: repeat(2, 1fr); */
-  /* height: 100%; */
-  /* width: 100%; */
   background: rgb(182, 182, 182);
+  min-height: 1000px;
 }
 
 .card-list {
-  /* border: solid 1px black; */
   height: 500px;
 }
 
@@ -113,7 +84,6 @@
 .card-display {
   background: white !important;
   border: solid 4px rgb(112, 112, 112);
-  /* margin: 0 auto; */
   padding: 10px;
   width: 35%;
   margin-left: auto;
@@ -128,12 +98,10 @@
 .track-display {
   justify-content: space-between;
   margin-top: 7px;
-  /* border-radius: 15px; */
   margin-left: auto;
   margin-right: auto;
   border-bottom: 1px solid rgb(102, 102, 102);
   display: flex;
-  /* width: 40%; */
 }
 
 .top-heading {
@@ -165,7 +133,6 @@ footer {
   background: none;
   font-size: 20px;
   border: none;
-  /* border: 0.4px solid black; */
   border-radius: 10px;
 }
 
@@ -177,9 +144,6 @@ footer {
 
 .addFave:active {
   transform: translateZ(10px);
-  /* box-shadow: (x-value) (y-value) (blur value) (spread value) (color); */
-  /* text-shadow: 0 0 20px #00aced;
-  transition: all 1s ease; */
 }
 
 .search-title {
@@ -188,4 +152,33 @@ footer {
 
 footer p {
   text-align: center;
+}
+
+.empty-favorites {
+  text-align: center;
+  font-weight: bold;
+  size: 50px;
+}
+
+.sub-bar {
+  background: white;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+}
+
+.sub-bar button {
+  border: none;
+  background: none;
+  font-weight: bold;
+}
+
+.popular-artists {
+  margin-top: 10px;
+  color: rgb(153, 103, 11);
+}
+
+.loadingspin {
+  display: flex;
+  justify-content: center;
 }
