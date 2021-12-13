@@ -9,36 +9,26 @@ export const initialState = {
   search: [],
   trackInfo: [],
   favorites: {},
-  loadingSearch: true,
-  loadingTop: true,
-  loadingFave: true,
-  loadingTrack: true,
-  loadingTopByArtist: true,
-  loadingTopArtist: true,
   isWaiting: false,
 };
 
 function reducer(state = initialState, action) {
-  // console.log(action);
   switch (action.type) {
     case Action.LoadSearch:
       return {
         ...state,
         search: action.payload,
-        loadingSearch: false,
       };
     case Action.LoadTopTracks:
       return {
         ...state,
         topTracks: action.payload,
-        loadingTop: false,
       };
 
     case Action.LoadTopArtists:
       return {
         ...state,
         topArtists: action.payload,
-        loadingTopArtist: false,
       };
 
     // case Action.LoadTopTags:
@@ -57,7 +47,6 @@ function reducer(state = initialState, action) {
       return {
         ...state,
         favorites: action.payload,
-        loadingFave: false,
       };
 
     case Action.LoadTrendingByArtist:
@@ -65,7 +54,6 @@ function reducer(state = initialState, action) {
       return {
         ...state,
         topSongsByArtist: action.payload,
-        loadingTopByArtist: false,
       };
 
     case Action.StartedWaiting:

@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import { FaveTrack } from "./FaveTrack";
 import { useDispatch, useSelector } from "react-redux";
 import { search, startLoadingFaves } from "../actions";
-import Loading from "./LoadingSpinner";
 
 export function Liked(props) {
   let faveSongs = props.liked.results;
@@ -118,7 +117,6 @@ export function Liked(props) {
         </div>
         <div className="body-fave">
           <div className="card-display">
-            <Loading load={loadingSearch} />
             <h2 className="top-heading">Favorites</h2>
             {faveSongs?.map((track) => (
               <FaveTrack track={track} />

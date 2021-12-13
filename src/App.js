@@ -13,7 +13,6 @@ import { Liked } from "./components/Liked";
 import { TrackInfo } from "./components/TrackInfo";
 import TopArtists from "./components/TopArtists";
 import ArtistInfo from "./components/ArtistInfo";
-import Loading from "./components/LoadingSpinner";
 import TopTracks from "./components/TopTracks";
 
 function App() {
@@ -38,12 +37,12 @@ function App() {
   };
 
   //For Loading Purposes
-  // const loadingTop = useSelector((state) => state.loadingTop);
   const isWaiting = useSelector((state) => state.isWaiting);
 
   return (
     <div className="App">
       {isWaiting && <div className="spinner" />}
+
       <Routes>
         <Route exact path="/search" element={<Search search={s} />} />
         <Route exact path="/favorites" element={<Liked liked={faves} />} />
@@ -106,7 +105,6 @@ function App() {
                 <button>Music By Genre</button>
                 <button>Top songs by Country</button>
               </div>
-              {/* <Loading load={loadingTop} /> */}
               <TopTracks tracks={topTracks} />
               <footer>
                 <p>

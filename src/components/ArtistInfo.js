@@ -8,7 +8,6 @@ function ArtistInfo() {
   const params = useParams();
   const name = params.name;
 
-  console.log(songs);
   return (
     <>
       <div className="top">
@@ -58,8 +57,6 @@ function ArtistInfo() {
       <div className="body">
         <div className="card-display">
           <h2 className="top-heading">Top Tracks for {name}</h2>
-          {/* <Loading load={loadingTop} /> */}
-
           {songs?.map((track) => (
             <Track track={track} />
           ))}
