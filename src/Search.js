@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Search.css";
 import { useDispatch } from "react-redux";
 import { search } from "./actions";
@@ -6,10 +6,11 @@ import { Link } from "react-router-dom";
 import { Track } from "./components/Track";
 
 export function Search(props) {
+  const [title, setTitle] = useState("");
   const dispatch = useDispatch();
   var searc = props.search;
   const onSearch = () => {
-    dispatch(search());
+    dispatch(search(title));
   };
   if (searc === undefined) {
     searc = JSON.parse(localStorage.getItem("search"));
@@ -37,6 +38,7 @@ export function Search(props) {
               id="textbox"
               placeholder="Search..."
               name="search"
+              onChange={(event) => setTitle(event.target.value)}
             ></input>
             <Link to={`/search/`}>
               <input

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { FaveTrack } from "./FaveTrack";
 import { useDispatch, useSelector } from "react-redux";
@@ -7,10 +7,11 @@ import Loading from "./LoadingSpinner";
 
 export function Liked(props) {
   let faveSongs = props.liked.results;
+  const [title, setTitle] = useState("");
   const loadingSearch = useSelector((state) => state.loadingSearch);
   const dispatch = useDispatch();
   const onSearch = () => {
-    dispatch(search(document.getElementById("textbox").value));
+    dispatch(search(title));
   };
 
   useEffect(() => {
@@ -38,6 +39,7 @@ export function Liked(props) {
                 id="textbox"
                 placeholder="Search..."
                 name="search"
+                onChange={(event) => setTitle(event.target.value)}
               ></input>
               <Link to={`/search/`}>
                 <input

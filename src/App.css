@@ -120,6 +120,7 @@
 
 .track-artist {
   font-size: 10px;
+  text-decoration: none;
 }
 
 footer {
@@ -171,11 +172,11 @@ footer p {
   border: none;
   background: none;
   font-weight: bold;
+  color: rgb(153, 103, 11);
 }
 
 .popular-artists {
   margin-top: 10px;
-  color: rgb(153, 103, 11);
 }
 
 .loadingspin {

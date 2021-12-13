@@ -32,7 +32,6 @@ export function search(keyword) {
 }
 
 export function loadSearch(search) {
-  console.log(search);
   return {
     type: Action.LoadSearch,
     payload: search,

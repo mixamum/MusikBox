@@ -37,6 +37,7 @@ export function Track(props) {
           <Link to={`/search/${track.name}`} onClick={getTI}>
             <p className="track-name">{track.name}</p>
           </Link>
+
           <p className="track-artist">{track.artist}</p>
         </div>
         <div className="fave-button">
@@ -50,9 +51,8 @@ export function Track(props) {
     return (
       <div className="track-display">
         <div className="track-info">
-          {/* <Link to={`/search/${track.name}`} onClick={getTI2}> */}
           <p className="track-name">{track.name}</p>
-          {/* </Link> */}
+
           <p className="track-artist">{track.artist.name}</p>
         </div>
         <div className="fave-button">

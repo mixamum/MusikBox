@@ -1,4 +1,3 @@
-// import { useSelector } from "react-redux";
 import { useDispatch, useSelector } from "react-redux";
 import "./App.css";
 import { Search } from "./Search";
@@ -6,20 +5,20 @@ import {
   search,
   loadTopTracks,
   loadTopArtists,
-  loadTopTags,
   startLoadingFaves,
 } from "./actions";
 import { Link, Routes, Route } from "react-router-dom";
-import { Track } from "./components/Track";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Liked } from "./components/Liked";
 import { TrackInfo } from "./components/TrackInfo";
 import TopArtists from "./components/TopArtists";
 import ArtistInfo from "./components/ArtistInfo";
 import Loading from "./components/LoadingSpinner";
+import TopTracks from "./components/TopTracks";
 
 function App() {
   // const topTags = useSelector((state) => state.topTags);
+  const [title, setTitle] = useState("");
   const topArtists = useSelector((state) => state.topArtists);
   const topTracks = useSelector((state) => state.topTracks);
   const s = useSelector((state) => state.search);
@@ -28,14 +27,14 @@ function App() {
   useEffect(() => {
     dispatch(loadTopTracks());
     dispatch(loadTopArtists());
-    dispatch(loadTopTags());
+    // dispatch(loadTopTags());
     dispatch(startLoadingFaves());
-    dispatch(search(document.getElementById("textbox").value));
-  }, [dispatch]);
+    dispatch(search(title));
+  }, [dispatch, title]);
   const onSearch = (ev) => {
     // ev.preventDefault();
     // ev.stopPropagation();
-    dispatch(search(document.getElementById("textbox").value));
+    dispatch(search(title));
   };
 
   //For Loading Purposes
@@ -47,7 +46,7 @@ function App() {
         <Route exact path="/search" element={<Search search={s} />} />
         <Route exact path="/favorites" element={<Liked liked={faves} />} />
         <Route exact path="/search/:title/" element={<TrackInfo />} />
-        <Route exact path="/artists/:name" element={<ArtistInfo />} />
+        <Route exact path="/artists/:name/" element={<ArtistInfo />} />
         <Route
           exact
           path="/artists"
@@ -79,6 +78,7 @@ function App() {
                       placeholder="Search..."
                       name="search"
                       className="searchField"
+                      onChange={(event) => setTitle(event.target.value)}
                     ></input>
                     <Link to={`/search/`}>
                       <input
@@ -102,24 +102,10 @@ function App() {
                   <button className="popular-artists">Popular Artists</button>
                 </Link>
                 <button>Music By Genre</button>
+                <button>Top songs by Country</button>
               </div>
-              <div className="body">
-                <div className="card-display">
-                  <h2 className="top-heading">Top Tracks</h2>
-                  <Loading load={loadingTop} />
-                  {topTracks?.map((track) => (
-                    <Track track={track} />
-                  ))}
-                </div>
-                {/* <div className="songDisplay">
-                  <h2>Top Tags</h2>
-                  <div className="card-list">
-                    {topTags.map((tag) => (
-                      <Tag tag={tag} />
-                    ))}
-                  </div>
-                </div> */}
-              </div>
+              <Loading load={loadingTop} />
+              <TopTracks tracks={topTracks} />
               <footer>
                 <p>
                   Made using{" "}
