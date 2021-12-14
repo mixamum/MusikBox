@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { getTrackInfo, startAddingFavorites } from "../actions";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 
 export function Track(props) {
   const track = props.track;
@@ -17,13 +17,13 @@ export function Track(props) {
     dispatch(startAddingFavorites(track.name, track.artist));
   };
 
-  const getTI = () => {
-    dispatch(getTrackInfo(track.name, track.artist));
-  };
+  // const getTI = () => {
+  //   dispatch(getTrackInfo(track.name, track.artist));
+  // };
 
-  const getTI2 = () => {
-    dispatch(getTrackInfo(track.name, track.artist.name));
-  };
+  // const getTI2 = () => {
+  //   dispatch(getTrackInfo(track.name, track.artist.name));
+  // };
 
   useEffect(() => {
     dispatch(getTrackInfo(track.name, track.artist));
@@ -34,9 +34,9 @@ export function Track(props) {
     return (
       <div className="track-display">
         <div className="track-info">
-          <Link to={`/search/${track.name}`} onClick={getTI}>
-            <p className="track-name">{track.name}</p>
-          </Link>
+          {/* <Link to={`/search/${track.name}`} onClick={getTI}> */}
+          <p className="track-name">{track.name}</p>
+          {/* </Link> */}
 
           <p className="track-artist">{track.artist}</p>
         </div>

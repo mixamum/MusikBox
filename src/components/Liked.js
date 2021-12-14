@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { FaveTrack } from "./FaveTrack";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { search, startLoadingFaves } from "../actions";
 
 export function Liked(props) {
   let faveSongs = props.liked.results;
   const [title, setTitle] = useState("");
-  const loadingSearch = useSelector((state) => state.loadingSearch);
   const dispatch = useDispatch();
   const onSearch = () => {
     dispatch(search(title));
@@ -119,7 +118,7 @@ export function Liked(props) {
           <div className="card-display">
             <h2 className="top-heading">Favorites</h2>
             {faveSongs?.map((track) => (
-              <FaveTrack track={track} />
+              <FaveTrack id={track.id} track={track} />
             ))}
           </div>
         </div>

@@ -58,7 +58,7 @@ function ArtistInfo() {
         <div className="card-display">
           <h2 className="top-heading">Top Tracks for {name}</h2>
           {songs?.map((track) => (
-            <Track track={track} />
+            <Track id={track.id} track={track} />
           ))}
         </div>
       </div>

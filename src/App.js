@@ -10,7 +10,7 @@ import {
 import { Link, Routes, Route } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 import { Liked } from "./components/Liked";
-import { TrackInfo } from "./components/TrackInfo";
+// import { TrackInfo } from "./components/TrackInfo";
 import TopArtists from "./components/TopArtists";
 import ArtistInfo from "./components/ArtistInfo";
 import TopTracks from "./components/TopTracks";
@@ -46,7 +46,7 @@ function App() {
       <Routes>
         <Route exact path="/search" element={<Search search={s} />} />
         <Route exact path="/favorites" element={<Liked liked={faves} />} />
-        <Route exact path="/search/:title/" element={<TrackInfo />} />
+        {/* <Route exact path="/search/:title/" element={<TrackInfo />} /> */}
         <Route exact path="/artists/:name/" element={<ArtistInfo />} />
         <Route
           exact

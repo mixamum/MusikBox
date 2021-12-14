@@ -8,7 +8,7 @@ function TopTracks(props) {
       <div className="card-display">
         <h2 className="top-heading">Top Tracks</h2>
         {tracks?.map((track) => (
-          <Track track={track} />
+          <Track id={track.id} track={track} />
         ))}
       </div>
     </div>
